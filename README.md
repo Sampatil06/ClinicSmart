@@ -35,18 +35,21 @@ Public browser
 
 - Responsive navigation
 - Hero, services and about sections
-- Appointment booking form
+- Appointment booking with centre and morning/evening slot selection
+- Availability checks, date-range/centre/slot blocking and confirmation popup
 - Success/error feedback after request submission
 - Link to protected staff dashboard
 
 ### Clinic dashboard
 
 - Secure password login/logout
-- View public appointment requests and up to 100 patient records
+- View, filter, paginate, add, edit and delete appointment requests
+- Block booking availability for a date range, specific slot, specific centre or any combination
 - Add or update a patient using their phone number
 - Add and remove medicine names
 - Build prescriptions with medicine, quantity and instructions
 - Store prescriptions with an atomic PostgreSQL transaction
+- Create and view patient invoices with a service description and total amount
 - Responsive dashboard navigation
 
 ## Project structure
@@ -133,14 +136,18 @@ The database tables are created automatically on first startup.
 | `medicines` | Generic medicine-name list |
 | `prescriptions` | Prescription header, patient relation and notes |
 | `prescription_items` | Medicine, quantity and how-to-take instructions |
-| `invoices` | Starter schema for future invoice implementation |
-| `bookings` | Public appointment requests |
+| `invoices` | Patient invoices, service description and total amount |
+| `bookings` | Public and manual appointment requests, slots, centres and statuses |
+| `booking_blocks` | Date ranges unavailable for all or selected slots/centres |
 
 ## API endpoints
 
 | Method | Endpoint | Access | Purpose |
 | --- | --- | --- | --- |
-| POST | `/api/bookings` | Public | Create appointment request |
+| POST | `/api/bookings` | Public | Create availability-checked appointment request |
+| GET/PATCH/DELETE | `/api/bookings` | Staff | List, edit and remove appointment requests |
+| POST | `/api/bookings/admin` | Staff | Create manual appointment request |
+| GET/POST/DELETE | `/api/booking-blocks` | Staff | Manage unavailable date ranges |
 | POST | `/api/login` | Public | Start staff session |
 | POST | `/api/logout` | Staff | End session |
 | GET | `/api/session` | Staff | Verify session |
@@ -148,6 +155,7 @@ The database tables are created automatically on first startup.
 | GET/POST | `/api/medicines` | Staff | List/add medicine names |
 | DELETE | `/api/medicines/:id` | Staff | Remove a medicine |
 | POST | `/api/prescriptions` | Staff | Create prescription |
+| GET/POST | `/api/invoices` | Staff | List/create invoices |
 | GET | `/api/bookings` | Staff | List appointment requests |
 
 ## Security implemented
@@ -182,6 +190,8 @@ This is a portfolio template, not a complete compliant medical-record platform. 
 
 - [ ] Homepage works on mobile, tablet and desktop
 - [ ] Public booking rejects invalid phone/date/time
+- [ ] Block a date range and confirm that a matching public booking is rejected
+- [ ] Add, edit, filter and delete a booking from the dashboard
 - [ ] Valid booking shows success message
 - [ ] Staff login rejects invalid password
 - [ ] Staff login opens dashboard
