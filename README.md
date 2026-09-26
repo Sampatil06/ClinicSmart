@@ -80,7 +80,6 @@ clinic-management-starter/
 ### 2. Install packages
 
 ```powershell
-cd C:\Users\Samarth\Documents\Codex\2026-08-13\i\clinic-management-starter
 npm install
 ```
 
@@ -213,7 +212,4 @@ git remote add origin YOUR_GITHUB_REPOSITORY_URL
 git push -u origin main
 ```
 
-Recommended repository title: `clinic-management-starter`.
 
-For LinkedIn or Upwork:  
-**“Built a generic full-stack clinic platform with a responsive public website, online appointment requests, secure staff dashboard, PostgreSQL patient records, medicine management and multi-item prescriptions using Node.js, Express and vanilla JavaScript.”**
