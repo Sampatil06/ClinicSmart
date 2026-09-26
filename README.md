@@ -77,7 +77,6 @@ clinic-management-starter/
 ### 2. Install packages
 
 ```powershell
-cd C:\Users\Samarth\Documents\Codex\2026-08-13\i\clinic-management-starter
 npm install
 ```
 
